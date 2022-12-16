@@ -27,7 +27,7 @@ public class DeleteLead {
 		driver.findElement(By.xpath("//a[contains(text(),'Find Leads')]")).click();
 		driver.findElement(By.xpath("//input[@name='id']")).sendKeys(leadId);
 		driver.findElement(By.xpath("//button[contains(text(),'Find Leads')]")).click();
-		
+		Thread.sleep(1000);
 		String actualMessage = driver.findElement(By.xpath("(//div[@class='x-paging-info'])[1]")).getText();
 		System.out.println(actualMessage);
 		String expectedMessage = "No records to display";
