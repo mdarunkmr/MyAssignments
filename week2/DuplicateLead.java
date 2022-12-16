@@ -1,6 +1,7 @@
 package week2.day2.assignment;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DuplicateLead {
@@ -19,8 +20,15 @@ public class DuplicateLead {
 		driver.findElement(By.xpath("//input[@name='emailAddress']")).sendKeys("vishu123@mail.com");
 		driver.findElement(By.xpath("//button[contains(text(),'Find Leads')]")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//a[@class='linktext'])[4]")).click();
-		driver.findElement(By.xpath("(//a[@class='subMenuButton'])[1]")).click();
+		WebElement leadId = driver.findElement(By.xpath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']/a"));
+		String text = leadId.getText();
+		System.out.println(text);
+		Thread.sleep(3000);
+		leadId.click();
+		driver.findElement(By.linkText("Duplicate Lead")).click();
+		Thread.sleep(2000);
+		String actualName = driver.findElement(By.xpath("//span[text()='First name']/following::input[1]")).getAttribute("value");
+		//System.out.println(actualName);
 		String actualTitle = driver.findElement(By.id("sectionHeaderTitle_leads")).getText();
 		//System.out.println(actualTitle);
 		String expectedTitle = "Duplicate Lead";
@@ -32,17 +40,14 @@ public class DuplicateLead {
 		}
 		driver.findElement(By.xpath("//input[@name='submitButton']")).click();
 		Thread.sleep(2000);
-		String actualName = driver.findElement(By.xpath("//input[@id='createLeadForm_firstName']")).getAttribute("value");
-		System.out.println(actualName);
-		String expectedName = driver.findElement(By.id("//span[@id='viewLead_firstName_sp']")).getText();
-		if (expectedName.equals(actualName))
+		String expectedName = driver.findElement(By.xpath("//span[text()='First name']/following::span[1]")).getText();
+		//System.out.println(expectedName);
+		if (actualName.equalsIgnoreCase(expectedName))
 		{ 
 			System.out.println("Name is correct");
 		}else{
 			System.out.println("Name is wrong");
 		}
-		
-
 		//driver.close();
 
 	}
