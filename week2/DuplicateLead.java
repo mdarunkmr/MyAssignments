@@ -48,7 +48,7 @@ public class DuplicateLead {
 		}else{
 			System.out.println("Name is wrong");
 		}
-		//driver.close();
+		driver.close();
 
 	}
 
